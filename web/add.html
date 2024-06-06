@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Add employee page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script>
+            function addTemperatures() {
+                
+                //create table
+                var table = document.getElementById("temperatureTable");
+                
+                //create new row
+                var newRow = table.insertRow();
+                
+                //create cell for a label
+                var cell1 = newRow.insertCell(0);
+                cell1.innerHTML = "Temperature: ";
+                        
+                //create a cell for a input
+                var cell2 = newRow.insertCell(1);
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "temp";
+                input.required = true;
+                cell2.appendChild(input);
+                
+                //create a cell for button
+                var cell3 = newRow.insertCell(2);
+                var button = document.createElement("button");
+                button.type = "button";
+                button.innerHTML = "Remove";
+                button.onclick = function() {
+                    table.deleteRow(newRow.rowIndex);
+                };
+                cell3.appendChild(button);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Add employee</h1>
+
+        <form action="AddServlet.do" method="POST">
+            <table>
+                <tr>
+                    <td>ID: </td>
+                    <td><input type="text" name="id" required=""/></td>
+                </tr>
+                <tr>
+                    <td>Name: </td>
+                    <td><input type="text" name="name" required=""/></td>
+                </tr>
+            </table>
+            
+            <table id="temperatureTable">
+                <tr>
+                    <td>Temperature: </td>
+                    <td><input type="text" name="temp" required=""/></td>
+                    <td><button type="button" onclick="addTemperatures()">Add Temperature</button></td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="ADD"/>
+        </form>
+    </body>
+</html>
+
+            

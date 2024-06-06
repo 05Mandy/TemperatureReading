@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.AddServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AcceptableTempServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.AcceptableTempServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HighTempServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.HighTempServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OccasionServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.OccasionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogOutServlet</servlet-name>
+        <servlet-class>za.ac.tut.web.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/AddServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptableTempServlet</servlet-name>
+        <url-pattern>/AcceptableTempServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HighTempServlet</servlet-name>
+        <url-pattern>/HighTempServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OccasionServlet</servlet-name>
+        <url-pattern>/OccasionServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOutServlet</servlet-name>
+        <url-pattern>/LogOutServlet.do</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <security-constraint>
+        <display-name>OfficerConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>OfficerResource</web-resource-name>
+            <description>Resources available to the officer</description>
+            <url-pattern>/add.html</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>The officer must be authinticated</description>
+            <role-name>officer</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ManagerConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>ManagerResource</web-resource-name>
+            <description>Resources available to the manager</description>
+            <url-pattern>/high.html</url-pattern>
+            <url-pattern>/acceptable.html</url-pattern>
+            <url-pattern>/occasions.html</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>The manager authenticate the user</description>
+            <role-name>manager</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login_error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>The officer of employees</description>
+        <role-name>officer</role-name>
+    </security-role>
+    <security-role>
+        <description>The manager of the employees</description>
+        <role-name>manager</role-name>
+    </security-role>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/access_denied.jsp</location>
+    </error-page>
+</web-app>
